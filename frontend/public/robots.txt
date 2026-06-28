@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /app-stub.html
+
+Sitemap: https://scenrix.com/sitemap.xml

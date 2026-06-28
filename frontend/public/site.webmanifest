@@ -1,0 +1,16 @@
+{
+  "name": "Scenrix",
+  "short_name": "Scenrix",
+  "description": "AI Executive Producer for YouTube Creators",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0C0E13",
+  "theme_color": "#0C0E13",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any"
+    }
+  ]
+}
