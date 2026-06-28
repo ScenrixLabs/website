@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Scenrix App — Private Beta</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--bg:#0C0E13;--bg2:#12151C;--card:#16191F;--border:rgba(255,255,255,0.07);--accent:#6C63FF;--text:#E8EAF0;--muted:#6E7385;--gradient:linear-gradient(135deg,#6C63FF 0%,#00C8FF 100%)}
+    body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;}
+    .card{max-width:480px;width:100%;text-align:center;padding:48px 40px;border:1px solid var(--border);border-radius:20px;background:var(--card);box-shadow:0 0 60px rgba(108,99,255,0.08);}
+    .logo{font-family:'Outfit',sans-serif;font-weight:800;font-size:22px;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:28px;}
+    .badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:5px 12px;border-radius:20px;background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.3);color:#FCD34D;margin-bottom:24px;}
+    h1{font-family:'Outfit',sans-serif;font-size:28px;font-weight:800;margin-bottom:12px;line-height:1.2;}
+    p{font-size:15px;color:var(--muted);line-height:1.7;margin-bottom:32px;}
+    .steps{display:flex;flex-direction:column;gap:10px;margin-bottom:36px;text-align:left;}
+    .step-row{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid var(--border);}
+    .s-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+    .s-done{background:#22C55E;box-shadow:0 0 8px rgba(34,197,94,0.5);}
+    .s-prog{background:var(--accent);box-shadow:0 0 8px rgba(108,99,255,0.5);animation:pulse 2s infinite;}
+    .s-plan{background:var(--muted);}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+    .step-text{font-size:13px;font-weight:500;}
+    .step-sub{font-size:11px;color:var(--muted);}
+    .btn{display:inline-block;padding:12px 28px;border-radius:10px;background:var(--gradient);color:#fff;font-size:15px;font-weight:600;cursor:pointer;border:none;text-decoration:none;}
+    .footer-note{margin-top:20px;font-size:12px;color:var(--muted);}
+    a{color:var(--accent);}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">Scenrix</div>
+    <div class="badge">🔒 Private Beta</div>
+    <h1>Application in development</h1>
+    <p>We're building the full Scenrix platform. Access to the dashboard is currently limited to internal testers. Join the waitlist to be first in line.</p>
+    <div class="steps">
+      <div class="step-row">
+        <div class="s-dot s-done"></div>
+        <div><div class="step-text">Architecture & Research</div><div class="step-sub">Completed</div></div>
+      </div>
+      <div class="step-row">
+        <div class="s-dot s-done"></div>
+        <div><div class="step-text">Backend API & Agent Pipeline</div><div class="step-sub">Completed</div></div>
+      </div>
+      <div class="step-row">
+        <div class="s-dot s-prog"></div>
+        <div><div class="step-text">Frontend Dashboard</div><div class="step-sub">In progress</div></div>
+      </div>
+      <div class="step-row">
+        <div class="s-dot s-plan"></div>
+        <div><div class="step-text">Private Beta Access</div><div class="step-sub">Q3 2026</div></div>
+      </div>
+    </div>
+    <a href="/#waitlist" class="btn">Request Early Access</a>
+    <div class="footer-note">Questions? <a href="mailto:support@scenrix.com">support@scenrix.com</a></div>
+  </div>
+</body>
+</html>

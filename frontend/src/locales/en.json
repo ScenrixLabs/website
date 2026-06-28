@@ -1,0 +1,64 @@
+{
+  "translation": {
+    "nav": {
+      "product": "Product",
+      "howItWorks": "How it Works",
+      "docs": "Docs",
+      "contact": "Contact"
+    },
+    "hero": {
+      "title": "Your AI Executive Producer.",
+      "subtitle": "Scenrix doesn't ask what you want to write. It tells you what your channel needs next — then builds it for you.",
+      "ctaPrimary": "Get Started Free",
+      "ctaSecondary": "See How It Works"
+    },
+    "comparison": {
+      "title": "Deciding Alone vs Working with Scenrix",
+      "traditional": "Traditional Workflow",
+      "traditionalTime": "14 hours",
+      "scenrix": "Scenrix Workflow",
+      "scenrixTime": "12 minutes",
+      "research": "Research",
+      "seo": "SEO Analysis",
+      "outline": "Outline Generation",
+      "writing": "Writing",
+      "factCheck": "Fact Checking"
+    },
+    "explorer": {
+      "title": "A Full Production Company",
+      "subtitle": "Every role filled by a specialist AI agent — working in sequence, with full context.",
+      "planner": "Channel Strategist",
+      "plannerDesc": "Understands your goals, niche, and growth trajectory.",
+      "research": "Research Specialist",
+      "researchDesc": "Deep research from 200+ sources with citations.",
+      "trend": "Trend Hunter",
+      "trendDesc": "Monitors YouTube and Search for emerging opportunities.",
+      "seo": "SEO Optimizer",
+      "seoDesc": "Titles, tags, and descriptions tuned for discovery.",
+      "writer": "Writer",
+      "writerDesc": "Production-ready scripts in your voice.",
+      "factChecker": "Fact Checker",
+      "factCheckerDesc": "Every claim verified before anything ships."
+    },
+    "output": {
+      "title": "The Final Output",
+      "subtitle": "Everything your production needs — in one package.",
+      "input": "Input: Your Goals",
+      "processing": "Scenrix: AI Executive Producer",
+      "readyPackage": "Ready Package",
+      "checklists": [
+        "Validated Niche & Positioning",
+        "Competitor Intelligence",
+        "Today's Best Opportunity",
+        "Research & Sources",
+        "Production-ready Script",
+        "SEO Title & Tags",
+        "Fact Check Report",
+        "Export to Notion/Docs"
+      ]
+    },
+    "footer": {
+      "rights": "© 2026 Scenrix. All rights reserved."
+    }
+  }
+}

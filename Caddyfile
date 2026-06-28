@@ -1,0 +1,36 @@
+# Caddyfile — Scenrix production routing
+# Landing page served at /  (static HTML)
+# Backend API at /api/*
+# App (future) at /app/*
+
+{$DOMAIN_NAME:scenrix.com} {
+
+    # Security headers
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        X-XSS-Protection           "1; mode=block"
+        X-Content-Type-Options     "nosniff"
+        X-Frame-Options            "SAMEORIGIN"
+        Referrer-Policy            "strict-origin-when-cross-origin"
+        -Server
+    }
+
+    # ── Backend API ──────────────────────────────────────────────────────────
+    handle /api/* {
+        reverse_proxy backend:8000
+    }
+
+    # ── App (React SPA — development in progress) ────────────────────────────
+    handle /app* {
+        rewrite * /app-stub.html
+        root * /srv
+        file_server
+    }
+
+    # ── Landing Page (static) ────────────────────────────────────────────────
+    handle {
+        root * /srv
+        try_files {path} /index.html
+        file_server
+    }
+}

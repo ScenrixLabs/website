@@ -1,0 +1,196 @@
+:root {
+  --bg-primary: #000000;
+  --bg-secondary: #0a0a0a;
+  --bg-surface: rgba(20, 20, 20, 0.6);
+  --bg-surface-hover: rgba(30, 30, 30, 0.8);
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  --accent-primary: #8b5cf6;
+  --accent-secondary: #7c3aed;
+  --accent-glow: rgba(139, 92, 246, 0.15);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Background gradient effect */
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 50vh;
+  background: radial-gradient(ellipse at top, var(--accent-glow) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--text-primary);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+h1, h2, h3 {
+  line-height: 1.1;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+h1 {
+  font-size: 4rem;
+  background: linear-gradient(180deg, #fff 0%, #a1a1aa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+p {
+  color: var(--text-secondary);
+  font-size: 1.125rem;
+}
+
+section {
+  padding: 8rem 0;
+}
+
+/* Glass panel */
+.glass-panel {
+  background: var(--bg-surface);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.5);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: 9999px; /* Pill shape */
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.btn-primary {
+  background: linear-gradient(180deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+  color: #fff;
+  box-shadow: 0 0 16px var(--accent-glow);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 0 24px rgba(139, 92, 246, 0.4);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+  backdrop-filter: blur(4px);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.btn-icon {
+  padding: 0.5rem;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-icon:hover {
+  background: var(--bg-surface);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+/* Grid Utilities */
+.grid { display: grid; gap: 2rem; }
+.grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+
+/* Flex Utilities */
+.flex { display: flex; }
+.flex-col { display: flex; flex-direction: column; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.justify-center { justify-content: center; }
+.gap-2 { gap: 0.5rem; }
+.gap-4 { gap: 1rem; }
+.gap-8 { gap: 2rem; }
+
+/* Text Utilities */
+.text-center { text-align: center; }
+.text-accent { color: var(--accent-primary); }
+.text-sm { font-size: 0.875rem; }
+.mt-4 { margin-top: 1rem; }
+.mt-8 { margin-top: 2rem; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-8 { margin-bottom: 2rem; }
+.w-full { width: 100%; }
+
+/* Animations */
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(139, 92, 246, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(139, 92, 246, 0); }
+}
+
+@keyframes progress {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+
+.animate-progress {
+  animation: progress 2s ease-in-out forwards;
+}
+
+@media (max-width: 768px) {
+  .grid-cols-2, .grid-cols-3 { grid-template-columns: 1fr; }
+  h1 { font-size: 2.5rem; }
+}

@@ -1,0 +1,1456 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scenrix — AI Executive Producer for YouTube Creators</title>
+  <meta name="description"
+    content="Scenrix is an AI Executive Producer that helps YouTube creators build, grow and monetize successful content businesses. Strategy, market intelligence, and script production — all in one platform." />
+  <meta name="keywords"
+    content="AI YouTube tool, content strategy, AI executive producer, YouTube growth, content creator AI" />
+  <meta property="og:title" content="Scenrix — AI Executive Producer" />
+  <meta property="og:description"
+    content="Stop guessing what to film. Scenrix analyses your market, builds your channel strategy, and delivers your best 3 video opportunities every morning." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700;800&display=swap"
+    rel="stylesheet" />
+  <style>
+    /* ── Reset & Base ──────────────────────────────────────────────────────── */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #0C0E13;
+      --bg-2: #12151C;
+      --bg-card: #16191F;
+      --border: rgba(255, 255, 255, 0.07);
+      --border-h: rgba(255, 255, 255, 0.14);
+      --text: #E8EAF0;
+      --text-muted: #6E7385;
+      --accent: #6C63FF;
+      --accent-2: #00C8FF;
+      --success: #22C55E;
+      --warning: #F59E0B;
+      --gradient: linear-gradient(135deg, #6C63FF 0%, #00C8FF 100%);
+      --glow: 0 0 60px rgba(108, 99, 255, 0.15);
+      --r: 14px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ── Noise texture overlay ─────────────────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    /* ── Layout ────────────────────────────────────────────────────────────── */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Nav ───────────────────────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(20px);
+      background: rgba(12, 14, 19, 0.8);
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .logo {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-badge {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      padding: 4px 8px;
+      border-radius: 4px;
+      background: rgba(108, 99, 255, 0.12);
+      border: 1px solid rgba(108, 99, 255, 0.25);
+      color: #a89fff;
+      text-transform: uppercase;
+    }
+
+    .btn-nav {
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 20px;
+      border-radius: 8px;
+      background: var(--gradient);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .btn-nav:hover {
+      opacity: 0.85;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .burger {
+      display: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: var(--text);
+      user-select: none;
+    }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      gap: 16px;
+      padding: 20px 24px;
+      background: rgba(12, 14, 19, 0.98);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .mobile-menu.open {
+      display: flex;
+    }
+
+    /* ── Hero ──────────────────────────────────────────────────────────────── */
+    .hero {
+      padding: 160px 0 100px;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero-glow {
+      position: absolute;
+      top: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 600px;
+      height: 400px;
+      background: radial-gradient(ellipse at center, rgba(108, 99, 255, 0.2) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-bg-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      overflow: hidden;
+      perspective: 1200px;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: -15%;
+      background: url('./ttten.svg') center/cover no-repeat;
+      opacity: 0.15;
+      transform: rotateX(15deg) scale(1.1);
+      transform-origin: center 30%;
+      mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse at center, black 0%, transparent 70%);
+      animation: floatBg 20s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatBg {
+      0% {
+        transform: rotateX(10deg) scale(1.05) translateY(0);
+        opacity: 0.12;
+      }
+
+      100% {
+        transform: rotateX(25deg) scale(1.15) translateY(-3%);
+        opacity: 0.2;
+      }
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+
+    .hero-eyebrow span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1)
+      }
+
+      50% {
+        opacity: 0.5;
+        transform: scale(0.8)
+      }
+    }
+
+    h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(38px, 6vw, 68px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+    }
+
+    h1 .grad {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-sub {
+      font-size: clamp(16px, 2vw, 20px);
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 48px;
+      line-height: 1.7;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 64px;
+    }
+
+    .btn-primary {
+      font-size: 16px;
+      font-weight: 600;
+      padding: 14px 32px;
+      border-radius: 10px;
+      background: var(--gradient);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 0 30px rgba(108, 99, 255, 0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 50px rgba(108, 99, 255, 0.55);
+    }
+
+    .btn-ghost {
+      font-size: 16px;
+      font-weight: 500;
+      padding: 14px 32px;
+      border-radius: 10px;
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border-h);
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      background: rgba(108, 99, 255, 0.07);
+    }
+
+    /* ── Stats Bar ─────────────────────────────────────────────────────────── */
+    .stats-bar {
+      display: flex;
+      gap: 0;
+      justify-content: center;
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      overflow: hidden;
+      background: var(--bg-card);
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    .stat {
+      flex: 1;
+      padding: 20px 24px;
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+
+    .stat:last-child {
+      border-right: none;
+    }
+
+    .stat-num {
+      font-family: 'Outfit', sans-serif;
+      font-size: 28px;
+      font-weight: 800;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* ── App Preview ───────────────────────────────────────────────────────── */
+    .preview-wrap {
+      margin: 80px auto 0;
+      max-width: 900px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: var(--glow), 0 40px 80px rgba(0, 0, 0, 0.4);
+      position: relative;
+    }
+
+    .preview-bar {
+      background: #1A1D26;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .dots {
+      display: flex;
+      gap: 6px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .dot-r {
+      background: #FF5F57;
+    }
+
+    .dot-y {
+      background: #FFBD2E;
+    }
+
+    .dot-g {
+      background: #28C840;
+    }
+
+    .preview-url {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 6px;
+      padding: 4px 12px;
+      font-size: 12px;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    .preview-body {
+      background: var(--bg-2);
+      display: flex;
+      min-height: 420px;
+    }
+
+    /* Sidebar */
+    .p-sidebar {
+      width: 220px;
+      flex-shrink: 0;
+      border-right: 1px solid var(--border);
+      padding: 20px 16px;
+    }
+
+    .p-logo {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 15px;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 24px;
+      padding: 0 4px;
+    }
+
+    .p-nav-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .p-nav-item.active {
+      background: rgba(108, 99, 255, 0.12);
+      color: #a89fff;
+    }
+
+    .p-nav-item:hover:not(.active) {
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .p-icon {
+      font-size: 15px;
+    }
+
+    /* Main area */
+    .p-main {
+      flex: 1;
+      padding: 24px;
+      overflow: hidden;
+    }
+
+    .p-header {
+      margin-bottom: 20px;
+    }
+
+    .p-header h3 {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .p-header p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .p-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 9px;
+      border-radius: 20px;
+      background: rgba(108, 99, 255, 0.15);
+      color: #a89fff;
+      border: 1px solid rgba(108, 99, 255, 0.25);
+      margin-bottom: 4px;
+    }
+
+    /* Rec cards */
+    .rec-cards {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .rec-card {
+      border-radius: 10px;
+      padding: 16px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      transition: border-color 0.2s, transform 0.2s;
+      cursor: pointer;
+    }
+
+    .rec-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .rec-card.primary {
+      flex: 2;
+      border-color: rgba(108, 99, 255, 0.35);
+      box-shadow: 0 0 20px rgba(108, 99, 255, 0.08);
+    }
+
+    .rec-card.secondary {
+      flex: 1;
+    }
+
+    .rec-type {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .rec-type.trend {
+      color: #F59E0B;
+    }
+
+    .rec-type.evergreen {
+      color: var(--success);
+    }
+
+    .rec-type.gap {
+      color: var(--accent-2);
+    }
+
+    .rec-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      line-height: 1.35;
+    }
+
+    .rec-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .rec-score {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 20px;
+      background: rgba(108, 99, 255, 0.15);
+      color: #a89fff;
+    }
+
+    .rec-btn {
+      display: block;
+      width: 100%;
+      margin-top: 10px;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 8px;
+      border-radius: 6px;
+      text-align: center;
+      background: var(--gradient);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    /* Pipeline mini */
+    .pipeline-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .pipe-step {
+      flex: 1;
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      font-size: 11px;
+      text-align: center;
+    }
+
+    .pipe-step.done {
+      border-color: rgba(34, 197, 94, 0.3);
+    }
+
+    .pipe-step.done .pipe-icon {
+      color: var(--success);
+    }
+
+    .pipe-step.active {
+      border-color: rgba(108, 99, 255, 0.4);
+    }
+
+    .pipe-step.active .pipe-icon {
+      color: var(--accent);
+    }
+
+    .pipe-icon {
+      font-size: 14px;
+      margin-bottom: 3px;
+    }
+
+    .pipe-label {
+      color: var(--text-muted);
+      font-size: 10px;
+    }
+
+    .pipe-arrow {
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+
+    /* ── Sections ──────────────────────────────────────────────────────────── */
+    section {
+      padding: 100px 0;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+
+    .section-sub {
+      font-size: 18px;
+      color: var(--text-muted);
+      max-width: 580px;
+      line-height: 1.7;
+      margin-bottom: 60px;
+    }
+
+    /* ── How it works ──────────────────────────────────────────────────────── */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+    }
+
+    .step {
+      padding: 28px 24px;
+      border-radius: var(--r);
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      transition: border-color 0.25s, transform 0.25s;
+    }
+
+    .step:hover {
+      border-color: var(--border-h);
+      transform: translateY(-3px);
+    }
+
+    .step-num {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: rgba(108, 99, 255, 0.12);
+      border: 1px solid rgba(108, 99, 255, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 15px;
+      color: #a89fff;
+      margin-bottom: 16px;
+    }
+
+    .step h4 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .step p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ── Agent architecture ─────────────────────────────────────────────────── */
+    .agents-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+    }
+
+    .agent-card {
+      padding: 20px 18px;
+      border-radius: var(--r);
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      text-align: center;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .agent-card:hover {
+      border-color: rgba(108, 99, 255, 0.4);
+      box-shadow: 0 0 20px rgba(108, 99, 255, 0.08);
+    }
+
+    .agent-icon {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .agent-name {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .agent-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* ── Tech stack ──────────────────────────────────────────────────────────── */
+    .tech-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .tech-tag {
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .tech-tag:hover {
+      border-color: var(--accent);
+      color: var(--text);
+    }
+
+    .tech-tag.highlight {
+      border-color: rgba(108, 99, 255, 0.4);
+      color: #a89fff;
+      background: rgba(108, 99, 255, 0.06);
+    }
+
+    /* ── Dev Status ──────────────────────────────────────────────────────────── */
+    .status-banner {
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      background: rgba(245, 158, 11, 0.05);
+      border-radius: var(--r);
+      padding: 24px 28px;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      margin-bottom: 40px;
+    }
+
+    .status-icon {
+      font-size: 24px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .status-content h4 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #FCD34D;
+      margin-bottom: 6px;
+    }
+
+    .status-content p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .status-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .status-item {
+      padding: 16px 20px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .s-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .s-dot.done {
+      background: var(--success);
+      box-shadow: 0 0 8px rgba(34, 197, 94, 0.5);
+    }
+
+    .s-dot.progress {
+      background: var(--accent);
+      box-shadow: 0 0 8px rgba(108, 99, 255, 0.5);
+      animation: pulse 2s infinite;
+    }
+
+    .s-dot.planned {
+      background: var(--text-muted);
+    }
+
+    .s-label {
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .s-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 1px;
+    }
+
+    /* ── CTA section ─────────────────────────────────────────────────────────── */
+    .cta-section {
+      text-align: center;
+      background: radial-gradient(ellipse at center, rgba(108, 99, 255, 0.12) 0%, transparent 70%);
+      border-top: 1px solid var(--border);
+      padding: 100px 0;
+    }
+
+    .cta-section h2 {
+      margin-bottom: 16px;
+    }
+
+    .cta-section p {
+      font-size: 18px;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+    }
+
+    /* ── Waitlist form ───────────────────────────────────────────────────────── */
+    .waitlist-form {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      max-width: 480px;
+      margin: 0 auto;
+      flex-wrap: wrap;
+    }
+
+    .waitlist-input {
+      flex: 1;
+      min-width: 220px;
+      padding: 13px 18px;
+      border-radius: 10px;
+      border: 1px solid var(--border-h);
+      background: var(--bg-card);
+      color: var(--text);
+      font-size: 15px;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .waitlist-input:focus {
+      border-color: var(--accent);
+    }
+
+    .waitlist-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .waitlist-success {
+      display: none;
+      margin-top: 16px;
+      font-size: 14px;
+      color: var(--success);
+    }
+
+    /* ── Footer ──────────────────────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 0;
+      text-align: center;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--text);
+    }
+
+    /* ── Animations ──────────────────────────────────────────────────────────── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Mobile ──────────────────────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .stats-bar {
+        flex-direction: column;
+      }
+
+      .stat {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .stat:last-child {
+        border-bottom: none;
+      }
+
+      .rec-cards {
+        flex-direction: column;
+      }
+
+      .p-sidebar {
+        display: none;
+      }
+
+      .status-list {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .pipeline-row {
+        flex-wrap: wrap;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .burger {
+        display: block;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ── Navigation ─────────────────────────────────────────────────────────── -->
+  <nav>
+    <div class="nav-inner">
+      <div class="logo" style="display: flex; align-items: center;">
+        <img src="/logo.png?v=2" alt="Scenrix Logo" style="height: 40px; width: auto; margin-right: 12px; border-radius: 4px; filter: drop-shadow(0 0 10px rgba(108,99,255,0.4)) brightness(1.25);">
+        Scenrix
+      </div>
+      <div class="nav-links">
+        <span class="nav-badge">Private Beta</span>
+        <button class="btn-nav" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">
+          Request Access
+        </button>
+      </div>
+      <div class="burger" onclick="document.getElementById('mobileMenu').classList.toggle('open')">☰</div>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <span class="nav-badge" style="align-self: flex-start;">Private Beta</span>
+      <button class="btn-nav" style="width: 100%;" onclick="document.getElementById('mobileMenu').classList.remove('open'); document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">
+        Request Access
+      </button>
+    </div>
+  </nav>
+
+  <!-- ── Hero ───────────────────────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-bg-wrapper">
+      <div class="hero-bg"></div>
+    </div>
+    <div class="hero-glow"></div>
+    <div class="container">
+      <div class="hero-eyebrow">
+        <span></span>
+        AI Executive Producer for YouTube
+      </div>
+      <h1>Stop guessing.<br />Start <span class="grad">growing.</span></h1>
+      <p class="hero-sub">
+        Scenrix analyses your niche, builds your channel strategy, monitors competitors,
+        and surfaces your three best video opportunities — every single morning.
+      </p>
+      <div class="hero-ctas">
+        <button class="btn-primary" onclick="document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">
+          Request Early Access
+        </button>
+        <button class="btn-ghost" onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'})">
+          See how it works →
+        </button>
+      </div>
+
+      <div class="stats-bar">
+        <div class="stat">
+          <div class="stat-num">6</div>
+          <div class="stat-label">Specialized AI Agents</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">3</div>
+          <div class="stat-label">Daily Opportunities</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Strategy-Aligned</div>
+        </div>
+      </div>
+
+      <!-- App Preview -->
+      <div class="preview-wrap fade-in" style="transition-delay: 0.2s;">
+        <div class="preview-bar">
+          <div class="dots">
+            <div class="dot dot-r"></div>
+            <div class="dot dot-y"></div>
+            <div class="dot dot-g"></div>
+          </div>
+          <div class="preview-url">app.scenrix.com — Dashboard</div>
+        </div>
+        <div class="preview-body">
+          <div class="p-sidebar">
+            <div class="p-logo">Scenrix</div>
+            <div class="p-nav-item active"><span class="p-icon">🏠</span> Dashboard</div>
+            <div class="p-nav-item"><span class="p-icon">🎯</span> Strategy</div>
+            <div class="p-nav-item"><span class="p-icon">🔍</span> Market Intel</div>
+            <div class="p-nav-item"><span class="p-icon">🎬</span> Studio</div>
+          </div>
+          <div class="p-main">
+            <div class="p-header">
+              <div class="p-badge">Stage: Search (0–1K)</div>
+              <h3>Today's Opportunities</h3>
+              <p>3 ideas selected from 847 signals · Updated 2 hours ago</p>
+            </div>
+            <div class="rec-cards">
+              <div class="rec-card primary">
+                <div class="rec-type trend">🔥 Trend · +340% this week</div>
+                <div class="rec-title">How to Save $1 Million in 3 Years — Realistic Plan</div>
+                <div class="rec-desc">Rising fast. Competitors haven't covered this angle. 14-day window.</div>
+                <div class="rec-score">Score: 9.2</div>
+                <button class="rec-btn">Start Project</button>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:12px;flex:1;">
+                <div class="rec-card secondary">
+                  <div class="rec-type evergreen">🌱 Evergreen</div>
+                  <div class="rec-title">Budgeting for Beginners in 2026</div>
+                  <div class="rec-desc">Stable demand. Matches your Pillar A.</div>
+                  <div class="rec-score">Score: 8.1</div>
+                </div>
+                <div class="rec-card secondary">
+                  <div class="rec-type gap">⚡ Content Gap</div>
+                  <div class="rec-title">Investing Mistakes Nobody Talks About</div>
+                  <div class="rec-desc">High demand. No quality videos exist.</div>
+                  <div class="rec-score">Score: 7.8</div>
+                </div>
+              </div>
+            </div>
+            <div class="pipeline-row">
+              <div class="pipe-step done">
+                <div class="pipe-icon">✓</div>
+                <div class="pipe-label">Strategy</div>
+              </div>
+              <div class="pipe-arrow">→</div>
+              <div class="pipe-step done">
+                <div class="pipe-icon">✓</div>
+                <div class="pipe-label">Market Scan</div>
+              </div>
+              <div class="pipe-arrow">→</div>
+              <div class="pipe-step active">
+                <div class="pipe-icon">◉</div>
+                <div class="pipe-label">Angle</div>
+              </div>
+              <div class="pipe-arrow">→</div>
+              <div class="pipe-step">
+                <div class="pipe-icon">○</div>
+                <div class="pipe-label">Script</div>
+              </div>
+              <div class="pipe-arrow">→</div>
+              <div class="pipe-step">
+                <div class="pipe-icon">○</div>
+                <div class="pipe-label">SEO</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── How it works ──────────────────────────────────────────────────────── -->
+  <section id="how" style="border-top: 1px solid var(--border);">
+    <div class="container">
+      <div class="section-label">How it works</div>
+      <h2>From onboarding to<br />ready-to-film — in minutes</h2>
+      <p class="section-sub">Four steps. No guesswork. Every recommendation is explained, every decision is transparent.
+      </p>
+      <div class="steps fade-in">
+        <div class="step">
+          <div class="step-num">01</div>
+          <h4>Tell us about your channel</h4>
+          <p>Paste your YouTube link or answer 4 quick questions. Our Strategist Agent builds your channel identity in
+            seconds.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <h4>We scan the market</h4>
+          <p>Market Intel Agent analyses 10+ competitors. Trend Hunter scans Google Trends and YouTube for rising
+            signals in your exact niche.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <h4>Decision Engine picks your best 3</h4>
+          <p>Opportunity Score (5 signals) selects the highest-value topics aligned to your Content Pillars and growth
+            stage.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <h4>Studio handles production</h4>
+          <p>Writer Agent builds your script. SEO Agent optimises title, description and tags. You film. We handle the
+            rest.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Agents ─────────────────────────────────────────────────────────────── -->
+  <section style="border-top: 1px solid var(--border); background: var(--bg-2);">
+    <div class="container">
+      <div class="section-label">Agent Architecture</div>
+      <h2>Six specialised AI agents.<br />One mission.</h2>
+      <p class="section-sub">Each agent owns one job. No bloated prompts, no hallucinations. Built on a multi-provider
+        registry — works with Claude, GPT-4o, and Gemini.</p>
+      <div class="agents-grid fade-in">
+        <div class="agent-card">
+          <div class="agent-icon">🎯</div>
+          <div class="agent-name">Strategist</div>
+          <div class="agent-desc">Channel positioning, pillars, growth stage classification</div>
+        </div>
+        <div class="agent-card">
+          <div class="agent-icon">📈</div>
+          <div class="agent-name">Trend Hunter</div>
+          <div class="agent-desc">Rising signals via Google Trends, YouTube API, SerpAPI</div>
+        </div>
+        <div class="agent-card">
+          <div class="agent-icon">🔍</div>
+          <div class="agent-name">Market Intel</div>
+          <div class="agent-desc">Competitor gap analysis and outlier detection (3x avg views)</div>
+        </div>
+        <div class="agent-card">
+          <div class="agent-icon">⚡</div>
+          <div class="agent-name">Decision Engine</div>
+          <div class="agent-desc">Opportunity Scoring across 5 weighted signals</div>
+        </div>
+        <div class="agent-card">
+          <div class="agent-icon">✍️</div>
+          <div class="agent-name">Writer</div>
+          <div class="agent-desc">Scripts, outlines and talking points in creator's voice</div>
+        </div>
+        <div class="agent-card">
+          <div class="agent-icon">🏷️</div>
+          <div class="agent-name">SEO Optimizer</div>
+          <div class="agent-desc">Title variants, descriptions, tags and thumbnail concepts</div>
+        </div>
+      </div>
+
+      <div style="margin-top: 48px;">
+        <div class="section-label" style="margin-bottom: 20px;">Tech Stack</div>
+        <div class="tech-grid">
+          <span class="tech-tag highlight">Claude (Anthropic)</span>
+          <span class="tech-tag highlight">GPT-4o (OpenAI)</span>
+          <span class="tech-tag highlight">Gemini (Google)</span>
+          <span class="tech-tag">FastAPI + Python 3.12</span>
+          <span class="tech-tag">React + TypeScript</span>
+          <span class="tech-tag">PostgreSQL + Redis</span>
+          <span class="tech-tag">YouTube Data API v3</span>
+          <span class="tech-tag">Google Trends</span>
+          <span class="tech-tag">SerpAPI</span>
+          <span class="tech-tag">Docker + Caddy</span>
+          <span class="tech-tag">ARQ (async job queue)</span>
+          <span class="tech-tag">SQLAlchemy 2.0</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Development Status ────────────────────────────────────────────────── -->
+  <section id="status" style="border-top: 1px solid var(--border);">
+    <div class="container">
+      <div class="section-label">Development Status</div>
+      <h2>Actively in development.<br />Private beta launching soon.</h2>
+
+      <div class="status-banner">
+        <div class="status-icon">🚧</div>
+        <div class="status-content">
+          <h4>Private Beta — Not Yet Public</h4>
+          <p>Scenrix is currently in active development. The platform shown is a working prototype.
+            We are accepting early-access requests from serious creators and teams building content businesses.
+            Full launch is planned for Q3 2026.</p>
+        </div>
+      </div>
+
+      <div class="status-list fade-in">
+        <div class="status-item">
+          <div class="s-dot done"></div>
+          <div>
+            <div class="s-label">Product Vision & Architecture</div>
+            <div class="s-sub">Completed</div>
+          </div>
+        </div>
+        <div class="status-item">
+          <div class="s-dot done"></div>
+          <div>
+            <div class="s-label">Research (6 modules)</div>
+            <div class="s-sub">Completed</div>
+          </div>
+        </div>
+        <div class="status-item">
+          <div class="s-dot done"></div>
+          <div>
+            <div class="s-label">UX Design (all screens)</div>
+            <div class="s-sub">Completed</div>
+          </div>
+        </div>
+        <div class="status-item">
+          <div class="s-dot progress"></div>
+          <div>
+            <div class="s-label">Backend API + Agents</div>
+            <div class="s-sub">In Progress</div>
+          </div>
+        </div>
+        <div class="status-item">
+          <div class="s-dot progress"></div>
+          <div>
+            <div class="s-label">Frontend Application</div>
+            <div class="s-sub">In Progress</div>
+          </div>
+        </div>
+        <div class="status-item">
+          <div class="s-dot planned"></div>
+          <div>
+            <div class="s-label">Private Beta Launch</div>
+            <div class="s-sub">Q3 2026</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Waitlist CTA ──────────────────────────────────────────────────────── -->
+  <section class="cta-section" id="waitlist">
+    <div class="container">
+      <h2>Get early access.</h2>
+      <p>Join the waitlist. We'll reach out personally when your spot opens.</p>
+      <form class="waitlist-form" id="wlForm" onsubmit="handleWaitlist(event)">
+        <input id="wlEmail" type="email" class="waitlist-input" placeholder="your@email.com" required
+          autocomplete="email" />
+        <button type="submit" class="btn-primary">Request Access</button>
+      </form>
+      <div class="waitlist-success" id="wlSuccess">
+        ✓ You're on the list. We'll be in touch soon.
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ────────────────────────────────────────────────────────────── -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-copy">© 2026 Scenrix. All rights reserved.</div>
+        <div class="footer-links">
+          <a href="mailto:support@scenrix.com">support@scenrix.com</a>
+          <a href="#" id="github-link" target="_blank" rel="noopener">GitHub</a>
+          <a href="#status">Status</a>
+          <a href="#how">How it works</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── Scroll animations ──────────────────────────────────────────────────
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // ── Waitlist form ──────────────────────────────────────────────────────
+    async function handleWaitlist(e) {
+      e.preventDefault();
+      const email = document.getElementById('wlEmail').value;
+      const form = document.getElementById('wlForm');
+      const ok = document.getElementById('wlSuccess');
+      const btn = form.querySelector('button');
+
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+
+      try {
+        const res = await fetch('/api/v1/waitlist', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+
+        if (res.ok) {
+          form.style.display = 'none';
+          ok.style.display = 'block';
+        } else {
+          const err = await res.json();
+          alert('Error: ' + (err.detail || 'Could not join waitlist.'));
+          btn.disabled = false;
+          btn.textContent = 'Request Access';
+        }
+      } catch (err) {
+        // Fallback for localhost static preview when backend is not running
+        console.warn('Backend not reachable, using local fallback for preview');
+        const list = JSON.parse(localStorage.getItem('scenrix_waitlist') || '[]');
+        if (!list.includes(email)) list.push(email);
+        localStorage.setItem('scenrix_waitlist', JSON.stringify(list));
+
+        form.style.display = 'none';
+        ok.style.display = 'block';
+      }
+    }
+
+    // ── Nav scroll effect ──────────────────────────────────────────────────
+    window.addEventListener('scroll', () => {
+      document.querySelector('nav').style.background =
+        window.scrollY > 20 ? 'rgba(12,14,19,0.95)' : 'rgba(12,14,19,0.8)';
+    });
+
+    // ── Premium Parallax Effects ───────────────────────────────────────────
+    const hero = document.querySelector('.hero');
+    const preview = document.querySelector('.preview-wrap');
+    const glow = document.querySelector('.hero-glow');
+
+    hero.addEventListener('mousemove', (e) => {
+      if (window.innerWidth <= 768) return; // Only on desktop
+
+      const rect = hero.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+      // 3D tilt for the mockup
+      const rotateX = y * -6; // degrees
+      const rotateY = x * 10;
+
+      preview.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+      preview.style.boxShadow = `${-x * 40}px ${-y * 40 + 40}px 80px rgba(0,0,0,0.5), 0 0 60px rgba(108,99,255,0.15)`;
+
+      // Opposite subtle movement for the glow (depth effect)
+      glow.style.transform = `translate(-50%, 0) translate(${x * -80}px, ${y * -80}px)`;
+    });
+
+    hero.addEventListener('mouseleave', () => {
+      if (window.innerWidth <= 768) return;
+
+      preview.style.transition = 'transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.6s ease';
+      preview.style.transform = `perspective(1200px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+      preview.style.boxShadow = `0 40px 80px rgba(0,0,0,0.4), 0 0 60px rgba(108,99,255,0.15)`;
+
+      glow.style.transition = 'transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1)';
+      glow.style.transform = `translate(-50%, 0) translate(0px, 0px)`;
+
+      setTimeout(() => {
+        preview.style.transition = '';
+        glow.style.transition = '';
+      }, 600);
+    });
+
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      if (scrolled < 1000 && window.innerWidth > 768) {
+        // Scroll parallax: Glow moves slower than the rest of the page
+        glow.style.marginTop = `${scrolled * 0.4}px`;
+      }
+    });
+  </script>
+</body>
+
+</html>
