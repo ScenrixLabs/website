@@ -1068,7 +1068,7 @@
   <nav>
     <div class="nav-inner">
       <div class="logo" style="display: flex; align-items: center;">
-        <img src="/logo.png?v=2" alt="Scenrix Logo" style="height: 40px; width: auto; margin-right: 12px; border-radius: 4px; filter: drop-shadow(0 0 10px rgba(108,99,255,0.4)) brightness(1.25);">
+        <img src="/logo.png" alt="Scenrix Logo" style="height: 40px; width: auto; margin-right: 12px;">
         Scenrix
       </div>
       <div class="nav-links">
@@ -1081,7 +1081,8 @@
     </div>
     <div class="mobile-menu" id="mobileMenu">
       <span class="nav-badge" style="align-self: flex-start;">Private Beta</span>
-      <button class="btn-nav" style="width: 100%;" onclick="document.getElementById('mobileMenu').classList.remove('open'); document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">
+      <button class="btn-nav" style="width: 100%;"
+        onclick="document.getElementById('mobileMenu').classList.remove('open'); document.getElementById('waitlist').scrollIntoView({behavior:'smooth'})">
         Request Access
       </button>
     </div>
@@ -1378,8 +1379,10 @@
       <div class="waitlist-success" id="wlSuccess">
         ✓ You're on the list. We'll be in touch soon.
       </div>
-      <div class="waitlist-error" id="wlError" style="display:none; margin-top:12px; color:#F87171; font-size:14px; text-align:center;">
-        ⚠ Something went wrong. Please email us directly at <a href="mailto:support@scenrix.com" style="color:#F87171; text-decoration:underline;">support@scenrix.com</a>
+      <div class="waitlist-error" id="wlError"
+        style="display:none; margin-top:12px; color:#F87171; font-size:14px; text-align:center;">
+        ⚠ Something went wrong. Please email us directly at <a href="mailto:support@scenrix.com"
+          style="color:#F87171; text-decoration:underline;">support@scenrix.com</a>
       </div>
     </div>
   </section>
