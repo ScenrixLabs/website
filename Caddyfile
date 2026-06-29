@@ -24,26 +24,21 @@
     # ── App (React SPA — development in progress) ────────────────────────────
     handle /app* {
         rewrite * /app-stub.html
-        root * /srv
-        file_server
+        reverse_proxy frontend:80
     }
 
     # ── Landing Page (static) ────────────────────────────────────────────────
     handle /privacy {
         rewrite * /privacy.html
-        root * /srv
-        file_server
+        reverse_proxy frontend:80
     }
 
     handle /terms {
         rewrite * /terms.html
-        root * /srv
-        file_server
+        reverse_proxy frontend:80
     }
 
     handle {
-        root * /srv
-        try_files {path} /index.html
-        file_server
+        reverse_proxy frontend:80
     }
 }
