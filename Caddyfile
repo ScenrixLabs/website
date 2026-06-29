@@ -3,6 +3,12 @@
 # Backend API at /api/*
 # App (future) at /app/*
 
+# ── www → canonical redirect ──────────────────────────────────────────────────
+www.scenrix.com {
+    redir https://scenrix.com{uri} permanent
+}
+
+# ── Canonical domain ──────────────────────────────────────────────────────────
 {$DOMAIN_NAME:scenrix.com} {
 
     # Security headers
