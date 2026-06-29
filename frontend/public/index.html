@@ -14,6 +14,12 @@
   <link rel="canonical" href="https://scenrix.com/" />
 
   <!-- Favicon & Manifest -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Scenrix" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="manifest" href="/site.webmanifest" />
   <meta name="theme-color" content="#0C0E13" />
@@ -41,22 +47,46 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "Scenrix",
-    "applicationCategory": "BusinessApplication",
-    "description": "AI Executive Producer for YouTube creators. Strategy, market intelligence, and script production — all in one platform.",
-    "url": "https://scenrix.com",
-    "operatingSystem": "Web",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-    "creator": {
-      "@type": "Organization",
-      "name": "ScenrixLabs",
-      "url": "https://github.com/ScenrixLabs"
-    }
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://scenrix.com/#organization",
+        "name": "Scenrix",
+        "url": "https://scenrix.com",
+        "logo": "https://scenrix.com/logo.png",
+        "sameAs": [
+          "https://github.com/ScenrixLabs",
+          "https://x.com/scenrixhq"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://scenrix.com/#website",
+        "url": "https://scenrix.com",
+        "name": "Scenrix",
+        "publisher": {
+          "@id": "https://scenrix.com/#organization"
+        }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Scenrix",
+        "applicationCategory": "BusinessApplication",
+        "description": "AI Executive Producer for YouTube creators. Strategy, market intelligence, and script production — all in one platform.",
+        "url": "https://scenrix.com",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "creator": {
+          "@id": "https://scenrix.com/#organization"
+        }
+      }
+    ]
   }
   </script>
 
-  <!-- Fonts -->
+  <!-- Fonts & Resource Hints -->
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -752,6 +782,7 @@
       margin-bottom: 16px;
     }
 
+    .step h3,
     .step h4 {
       font-size: 16px;
       font-weight: 600;
@@ -849,6 +880,7 @@
       margin-top: 2px;
     }
 
+    .status-content h3,
     .status-content h4 {
       font-size: 16px;
       font-weight: 600;
@@ -1072,7 +1104,7 @@
 <body>
 
   <!-- ── Navigation ─────────────────────────────────────────────────────────── -->
-  <nav>
+  <nav aria-label="Main navigation">
     <div class="nav-inner">
       <div class="logo" style="display: flex; align-items: center;">
         <img src="/logo.png" alt="Scenrix Logo" style="height: 40px; width: auto; margin-right: 12px;">
@@ -1156,7 +1188,7 @@
           <div class="p-main">
             <div class="p-header">
               <div class="p-badge">Stage: Search (0–1K)</div>
-              <h3>Today's Opportunities</h3>
+              <h2 class="mockup-heading" style="font-size: 18px; font-weight: 600; margin-bottom: 4px;">Today's Opportunities</h2>
               <p>3 ideas selected from 847 signals · Updated 2 hours ago</p>
             </div>
             <div class="rec-cards">
@@ -1319,7 +1351,7 @@
       <div class="status-banner">
         <div class="status-icon">🚧</div>
         <div class="status-content">
-          <h4>Private Beta — Not Yet Public</h4>
+          <h3>Private Beta — Not Yet Public</h3>
           <p>Scenrix is currently in active development. The platform shown is a working prototype.
             We are accepting early-access requests from serious creators and teams building content businesses.
             Full launch is planned for Q3 2026.</p>
@@ -1380,7 +1412,7 @@
       <p>Join the waitlist. We'll reach out personally when your spot opens.</p>
       <form class="waitlist-form" id="wlForm" onsubmit="handleWaitlist(event)">
         <input id="wlEmail" type="email" class="waitlist-input" placeholder="your@email.com" required
-          autocomplete="email" />
+          autocomplete="email" aria-label="Email address for waitlist" />
         <button type="submit" class="btn-primary">Request Access</button>
       </form>
       <div class="waitlist-success" id="wlSuccess">
@@ -1399,7 +1431,7 @@
     <div class="container">
       <div class="footer-inner">
         <div class="footer-copy">© 2026 Scenrix. All rights reserved.</div>
-        <div class="footer-links">
+        <div class="footer-links" role="navigation" aria-label="Footer links">
           <a href="mailto:support@scenrix.com">support@scenrix.com</a>
           <a href="https://github.com/ScenrixLabs" id="github-link" target="_blank" rel="noopener">GitHub</a>
           <a href="#status">Status</a>
